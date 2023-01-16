@@ -2,9 +2,12 @@ console.log("run seed script");
 import { faker } from "@faker-js/faker";
 import Photo from "./models/Photo.js";
 import "./lib/connect_db.js";
+import dotenv from "dotenv";
+dotenv.config();
 const deleteAll = async () => {
     return await Photo.deleteMany();
 };
+const repeatedOutput = process.argv.REP || 40;
 const createPhoto = async () => {
     // 1 Datensatz erzeugen:
     const photo = new Photo({
@@ -29,7 +32,7 @@ try {
     await deleteAll();
 
     // 100 Datensätze laut Schema erzeugen (einzelne Objekte, die als Documents gespeichert werden)
-    await createFake(20);
+    await createFake(repeatedOutput);
 
     process.exit(0);
 } catch (error) {
