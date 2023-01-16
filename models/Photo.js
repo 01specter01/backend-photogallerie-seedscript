@@ -1,42 +1,112 @@
 import mongoose from "mongoose";
 
-/**
- * Obwohl uns MongoDB alle Freiheiten gibt wie wir unsere Daten speichern können,
- * können wir mit Mongoose trotzdem eine Gewisse Struktur geben. Dafür erstellen
- * wir ein Schema, dass sagt, welche Informationen wollen wir speichern, welchen
- * Datentyp benötigen wir etc. Mit mongoose wird aus einer NoSQL Datenbank ein wenig
- * eine SQL Datenbank.
- *
- * Shorthand: Wenn wir nur den Datentyp angeben, dann können wir anstatt price: {type: Number}
- * auch einfach nur price: Number schreiben
- */
-const schema = new mongoose.Schema({
-    price: Number,
-    date: Date,
-    url: {
+const equipment = new mongoose.Schema({
+    name: {
         type: String,
+        required: true,
+    },
+    type: {
+        type: String,
+        required: true,
+    },
+    sensor: {
+        type: String,
+        required: true,
+    },
+    lensMount: {
+        type: String,
+        required: true,
+    },
+    Manufacturer: {
+        type: String,
+        required: true,
+    },
+});
+const setting = new mongoose.Schema({
+    focalLength: {
+        type: Number,
+        required: true,
         validate: {
-            /**
-             * Mongoose gibt uns die Möglichkeit eingegebene Daten zu validieren, bevor wir sie
-             * in MongoDB speichern. Dafür müssen wir dem Feld ein validate attribut geben.
-             * Innherlab von validate haben wir den validator, das ist eine Funktion, die das zu speichernde
-             * Feld empfängt und einen boolean zurück gibt. True wenn alles passt, False falls nicht.
-             * Wir checken also, ob unsere URL entweder mit http oder www beginnt.
-             * Um noch bessere validierung zu machen, sollten wir Regex nutzen.
-             * Außerdem hat validate noch die Möglichkeit eine Nachricht zu verfassen, falls der validator
-             * false zurück gibt
-             */
             validator: (v) => {
-                const val = v.startsWith("http") || v.startsWith("www");
+                const val = v.Number >= 18 || v.Number <= 55;
                 return val;
             },
-            message: "Bitte übergebe eine richtige URL",
+            message: "focal length value is not possible",
         },
         required: true,
-        unique: true,
     },
-    theme: String,
+    exposure: {
+        type: String,
+        required: true,
+        validate: {
+            validator: (v) => {
+                const val = v.Number > 0 || v.Number <= 10000;
+                return val;
+            },
+            message: "exposure value is not possible",
+        },
+        required: true,
+    },
+    aperture: {
+        type: Number,
+        required: true,
+        validate: {
+            validator: (v) => {
+                const val = v.Number >= 3000 || v.Number <= 10000;
+                return val;
+            },
+            message: "aperture value is not possible",
+        },
+        required: true,
+    },
+    iso: {
+        type: String,
+        required: true,
+        validate: {
+            validator: (v) => {
+                const val = v.Number >= 3000 || v.Number <= 10000;
+                return val;
+            },
+            message: "iso value is not possible",
+        },
+        required: true,
+    },
+    whiteBalance: {
+        type: String,
+        validate: {
+            validator: (v) => {
+                const val = v.Number >= 3000 || v.Number <= 10000;
+                return val;
+            },
+            message: "white balance value is not possible",
+        },
+        required: true,
+    },
 });
+const schema = new mongoose.Schema(
+    {
+        price: Number,
+        date: Date,
+        url: {
+            type: String,
+            validate: {
+                validator: (v) => {
+                    const val = v.startsWith("http") || v.startsWith("www");
+                    return val;
+                },
+                message: "Bitte übergebe eine richtige URL",
+            },
+            required: true,
+            unique: true,
+        },
+        theme: String,
+        equpment: [equipment],
+        setting: { setting },
+    },
+    {
+        versionKey: false,
+    }
+);
 
 //Model: Photo -> Collection: photos
 const Photo = mongoose.model("Photo", schema);
