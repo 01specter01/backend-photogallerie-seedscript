@@ -4,10 +4,11 @@ import Photo from "./models/Photo.js";
 import "./lib/connect_db.js";
 import dotenv from "dotenv";
 dotenv.config();
+
 const deleteAll = async () => {
     return await Photo.deleteMany();
 };
-const repeatedOutput = process.env.REP || 20;
+
 const createPhoto = async () => {
     // 1 Datensatz erzeugen:
     const photo = new Photo({
@@ -20,7 +21,7 @@ const createPhoto = async () => {
     await photo.save();
 };
 
-const createFake = async (count = 1) => {
+const createFake = async (count = 20) => {
     for (let i = 0; i < count; i++) {
         console.log("creating photo: ", i + 1);
         await createPhoto();
@@ -29,11 +30,21 @@ const createFake = async (count = 1) => {
 
 try {
     // Collections leeren (deleteMany())
-    await deleteAll();
+    if (!process.argv.includes("doNotDelete")) {
+        console.log("deleting all records...");
+        await deleteAll();
+        console.log("done");
+    }
 
     // 100 Datensätze laut Schema erzeugen (einzelne Objekte, die als Documents gespeichert werden)
-    await createFake(repeatedOutput);
+    console.log("creating new fakedata...");
 
+    const count =
+        process.argv[2] === "doNotDelete" ? undefined : process.argv[2];
+    await createFake(count);
+    console.log("done");
+
+    console.log("seeding finished. happy coding!");
     process.exit(0);
 } catch (error) {
     console.error(error);
