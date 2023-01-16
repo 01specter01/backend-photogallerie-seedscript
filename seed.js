@@ -7,7 +7,7 @@ dotenv.config();
 const deleteAll = async () => {
     return await Photo.deleteMany();
 };
-const repeatedOutput = process.argv.REP || 40;
+const repeatedOutput = process.env.REP || 20;
 const createPhoto = async () => {
     // 1 Datensatz erzeugen:
     const photo = new Photo({
