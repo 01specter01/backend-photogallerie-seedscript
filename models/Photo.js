@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import Album from "./Album.js";
 
 const equipment = new mongoose.Schema(
     {
@@ -110,6 +111,11 @@ const schema = new mongoose.Schema(
             type: setting,
             required: true,
         },
+        album: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "Author",
+            required: true,
+        },
     },
     {
         versionKey: false,
@@ -132,7 +138,7 @@ export const getAll = async () => {
     /**
      * Der Rückgabetyp von find() ist ein Array
      */
-    const photos = await Photo.find();
+    const photos = await Photo.find().populate("album");
     return photos;
 };
 

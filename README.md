@@ -23,3 +23,11 @@ Erweitere dein Photo-Model um SubDocuments, in denen das eingesetzte Equipment u
 - Folgende Einstellungen sollen angegeben werden: Brennweite (focal length), Belichtungszeit (exposure), Blende (aperture), Empfindlichkeit (iso), Weißabgleich (white balance).
 Versuche die Einstellungen so gut wie möglich zu validieren.
 ```
+
+### Part 3
+
+```js
+Füge deiner Galerie-App ein Album-Model hinzu.
+Richte eine Referenz zwischen Photo und Album ein. Überlege dir, wo du die Referenz speicherst.
+Erweitere auch dein Seed-Script, damit du Alben automatisch generieren kannst.
+```
