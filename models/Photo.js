@@ -17,9 +17,8 @@ const equipment = new mongoose.Schema({
         type: String,
         required: true,
     },
-    Manufacturer: {
+    manufacturer: {
         type: String,
-        required: true,
     },
 });
 const setting = new mongoose.Schema({

@@ -19,6 +19,17 @@ const createPhoto = async () => {
 
     // Datensätze in DB speichern
     await photo.save();
+    // 1 Datensatz erzeugen:
+    const equipment = new Photo({
+        name: faker.lorem.sentences(1),
+        type: faker.lorem.sentences(),
+        sensor: faker.lorem.sentences(1),
+        lensMount: faker.lorem.sentences(1),
+        manufacturer: faker.lorem.sentences(),
+    });
+
+    // Datensätze in DB speichern
+    await equipment.save();
 };
 
 const createFake = async (count = 20) => {
