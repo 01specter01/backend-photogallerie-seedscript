@@ -113,7 +113,7 @@ const schema = new mongoose.Schema(
         },
         album: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Author",
+            ref: "Album",
             required: true,
         },
     },

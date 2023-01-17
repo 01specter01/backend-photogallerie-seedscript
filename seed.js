@@ -1,13 +1,21 @@
-console.log("run seed script");
 import { faker } from "@faker-js/faker";
 import Photo from "./models/Photo.js";
 import "./lib/connect_db.js";
 import dotenv from "dotenv";
+import Album from "./models/Album.js";
 dotenv.config();
+console.log("run seed script");
 
-const deleteAll = async () => {
+const deletePhotos = async () => {
     return await Photo.deleteMany();
 };
+
+const deleteAlbums = async () => {
+    return await Album.deleteMany();
+};
+
+const albums = [];
+
 const createEquipment = () => ({
     name: faker.lorem.sentences(1),
     type: faker.lorem.sentences(1),
@@ -48,6 +56,14 @@ const createPhoto = async () => {
 
     // // Datensätze in DB speichern
     // await equipment.save();
+};
+
+const createAlbum = async () => {
+    const album = new Album({
+        albumName: faker.database.collation(),
+    });
+    const result = await album.save();
+    albums.push(result._id);
 };
 
 const createFake = async (count = 20) => {
