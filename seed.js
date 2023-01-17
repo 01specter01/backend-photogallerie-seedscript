@@ -8,28 +8,46 @@ dotenv.config();
 const deleteAll = async () => {
     return await Photo.deleteMany();
 };
+const createEquipment = () => ({
+    name: faker.lorem.sentences(1),
+    type: faker.lorem.sentences(1),
+    sensor: faker.lorem.sentences(1),
+    lensMount: faker.lorem.sentences(1),
+    manufacturer: faker.lorem.sentences(1),
+});
+
+const createSetting = () => ({
+    focalLength: faker.datatype.number({ min: 18, max: 55 }),
+    exposure: faker.datatype.number({ min: +(1 / 6000), max: 600 }),
+    aperture: faker.datatype.number({ min: 3000, max: 6000 }),
+    iso: faker.datatype.number({ min: 100, max: 25000 }),
+    whiteBalance: faker.datatype.number({ min: 1000, max: 4000 }),
+});
 
 const createPhoto = async () => {
     // 1 Datensatz erzeugen:
     const photo = new Photo({
-        title: faker.lorem.sentences(1),
-        description: faker.lorem.sentences(),
+        price: faker.commerce.price(),
+        date: faker.date.past(),
         url: faker.image.imageUrl(undefined, undefined, undefined, true),
+        theme: faker.lorem.sentences(),
+        equipment: createEquipment(),
+        setting: createSetting(),
     });
 
     // Datensätze in DB speichern
     await photo.save();
-    // 1 Datensatz erzeugen:
-    const equipment = new Photo({
-        name: faker.lorem.sentences(1),
-        type: faker.lorem.sentences(),
-        sensor: faker.lorem.sentences(1),
-        lensMount: faker.lorem.sentences(1),
-        manufacturer: faker.lorem.sentences(),
-    });
+    // // 1 Datensatz erzeugen:
+    // const equipment = new Photo({
+    //     name: faker.lorem.sentences(1),
+    //     type: faker.lorem.sentences(),
+    //     sensor: faker.lorem.sentences(1),
+    //     lensMount: faker.lorem.sentences(1),
+    //     manufacturer: faker.lorem.sentences(),
+    // });
 
-    // Datensätze in DB speichern
-    await equipment.save();
+    // // Datensätze in DB speichern
+    // await equipment.save();
 };
 
 const createFake = async (count = 20) => {

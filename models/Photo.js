@@ -25,61 +25,57 @@ const setting = new mongoose.Schema({
     focalLength: {
         type: Number,
         required: true,
-        validate: {
-            validator: (v) => {
-                const val = v.Number >= 18 || v.Number <= 55;
-                return val;
-            },
-            message: "focal length value is not possible",
-        },
-        required: true,
+        // validate: {
+        //     validator: (v) => {
+        //         const val = v.Number > 1;
+        //         //> 18 && v.Number <= 55;
+        //         return val;
+        //     },
+        //     message: "focal length value is not possible",
+        // },
     },
     exposure: {
-        type: String,
+        type: Number,
         required: true,
-        validate: {
-            validator: (v) => {
-                const val = v.Number > 0 || v.Number <= 10000;
-                return val;
-            },
-            message: "exposure value is not possible",
-        },
-        required: true,
+        // validate: {
+        //     validator: (v) => {
+        //         const val = v.Number > +(1 / 6000) && v.Number <= 600;
+        //         return val;
+        //     },
+        //     message: "exposure value is not possible",
+        // },
     },
     aperture: {
         type: Number,
         required: true,
-        validate: {
-            validator: (v) => {
-                const val = v.Number >= 3000 || v.Number <= 10000;
-                return val;
-            },
-            message: "aperture value is not possible",
-        },
-        required: true,
+        // validate: {
+        //     validator: (v) => {
+        //         const val = v.Number >= 3000 && v.Number <= 10000;
+        //         return val;
+        //     },
+        //     message: "aperture value is not possible",
+        // },
     },
     iso: {
-        type: String,
+        type: Number,
         required: true,
-        validate: {
-            validator: (v) => {
-                const val = v.Number >= 3000 || v.Number <= 10000;
-                return val;
-            },
-            message: "iso value is not possible",
-        },
-        required: true,
+        // validate: {
+        //     validator: (v) => {
+        //         const val = v.Number >= 100 && v.Number <= 25000;
+        //         return val;
+        //     },
+        //     message: "iso value is not possible",
+        // },
     },
     whiteBalance: {
-        type: String,
-        validate: {
-            validator: (v) => {
-                const val = v.Number >= 3000 || v.Number <= 10000;
-                return val;
-            },
-            message: "white balance value is not possible",
-        },
-        required: true,
+        type: Number,
+        // validate: {
+        //     validator: (v) => {
+        //         const val = v.Number >= 3000 && v.Number <= 4000;
+        //         return val;
+        //     },
+        //     message: "white balance value is not possible",
+        // },
     },
 });
 const schema = new mongoose.Schema(
@@ -99,8 +95,8 @@ const schema = new mongoose.Schema(
             unique: true,
         },
         theme: String,
-        equpment: [equipment],
-        setting: { setting },
+        equipment: [equipment],
+        setting: [setting],
     },
     {
         versionKey: false,
