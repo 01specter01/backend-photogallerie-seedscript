@@ -1,5 +1,6 @@
 import express from "express";
 import photoRouter from "./routes/photoRoutes.js";
+import log from "./middlewares/log.js";
 
 import dotenv from "dotenv";
 dotenv.config();
@@ -21,7 +22,7 @@ app.use((req, res, next) => {
     throw new Error("mist")
 })
 */
-
+app.use(log);
 app.use("/photos", photoRouter);
 
 /**
