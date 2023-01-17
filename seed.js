@@ -1,8 +1,9 @@
 import { faker } from "@faker-js/faker";
 import Photo from "./models/Photo.js";
+import Album from "./models/Album.js";
 import "./lib/connect_db.js";
 import dotenv from "dotenv";
-import Album from "./models/Album.js";
+
 dotenv.config();
 console.log("run seed script");
 
@@ -41,6 +42,7 @@ const createPhoto = async () => {
         theme: faker.lorem.sentences(),
         equipment: createEquipment(),
         setting: createSetting(),
+        album: albums[0],
     });
 
     // Datensätze in DB speichern
@@ -66,27 +68,41 @@ const createAlbum = async () => {
     albums.push(result._id);
 };
 
-const createFake = async (count = 20) => {
+const createPhotos = async (count = 20) => {
     for (let i = 0; i < count; i++) {
-        console.log("creating photo: ", i + 1);
+        console.log("creating photos: ", i + 1);
         await createPhoto();
     }
 };
+const createAlbums = async (count = 20) => {
+    for (let i = 0; i < count / 4; i++) {
+        console.log("creating album: ", i + 1);
+        await createAlbum();
+    }
+};
+// const createFake = async (count = 20) => {
+//     for (let i = 0; i < count; i++) {
+//         console.log("creating photo: ", i + 1);
+//         await createPhoto();
+//     }
+// };
 
 try {
     // Collections leeren (deleteMany())
     if (!process.argv.includes("doNotDelete")) {
         console.log("deleting all records...");
-        await deleteAll();
+        await deletePhotos();
+        await deleteAlbums();
         console.log("done");
     }
 
     // 100 Datensätze laut Schema erzeugen (einzelne Objekte, die als Documents gespeichert werden)
     console.log("creating new fakedata...");
-
     const count =
         process.argv[2] === "doNotDelete" ? undefined : process.argv[2];
-    await createFake(count);
+    await createAlbums(count);
+    console.log(albums);
+    await createPhotos(count);
     console.log("done");
 
     console.log("seeding finished. happy coding!");
