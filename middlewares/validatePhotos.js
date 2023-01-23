@@ -8,22 +8,22 @@ export const validatePost = (req, res, next) => {
     if (!req.body.price > 0) {
         return res.status(400).json("please provide price over 0");
     }
-    // email und username sind gegeben
+    // price is more than 0
 
-    if (!req.body.date > 0) {
+    if (!req.body.date > "2022-01-01") {
         return res.status(400).json("date is required");
     }
-    // email ist länger als 0 Zeichen lang
+    // date is later than 1. january 2022
 
     if (!req.body.url.includes("http") || req.body.url.includes("www")) {
         return res.status(400).json("url must include http or www");
     }
-    // email enthält ein @-Zeichen
+    // url includes www or http
 
     if (!req.body.theme.length > 0) {
         return res.status(400).json("theme is required");
     }
-    // username ist länger als 0 Zeichen lang
+    // theme length is greater than 0
 
     next();
 };
