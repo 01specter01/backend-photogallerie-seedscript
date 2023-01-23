@@ -100,12 +100,10 @@ const schema = new mongoose.Schema(
         equipment: [equipment],
         setting: {
             type: setting,
-            required: true,
         },
         album: {
             type: mongoose.Schema.Types.ObjectId,
             ref: "Album",
-            required: true,
         },
     },
     {
