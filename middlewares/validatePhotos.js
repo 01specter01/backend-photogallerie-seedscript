@@ -10,7 +10,7 @@ export const validatePost = (req, res, next) => {
     }
     // price is more than 0
 
-    if (!req.body.date > "2022-01-01") {
+    if (!req.body.date > "2022-01-23T20:34:55+00:00") {
         return res.status(400).json("date is required");
     }
     // date is later than 1. january 2022

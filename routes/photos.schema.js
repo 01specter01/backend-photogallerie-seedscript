@@ -20,7 +20,7 @@ export const postSchema = {
     type: "object",
     properties: {
         price: { type: "number" },
-        date: { type: "object", date: true },
+        // date: { type: "date" },
         url: { type: "string" },
         theme: { type: "string" },
     },

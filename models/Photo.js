@@ -83,7 +83,10 @@ const setting = new mongoose.Schema(
 const schema = new mongoose.Schema(
     {
         price: Number,
-        date: Date,
+        date: {
+            type: Date,
+            default: Date.now(),
+        },
         url: {
             type: String,
             validate: {
