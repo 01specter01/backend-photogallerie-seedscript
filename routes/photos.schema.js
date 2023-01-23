@@ -1,5 +1,8 @@
 import Ajv from "ajv";
+import addFormats from "ajv-formats";
+
 const ajv = new Ajv({ allErrors: true });
+addFormats(ajv);
 
 ajv.addFormat("custom-date-time", function (dateTimeString) {
     if (typeof dateTimeString === "object") {
@@ -17,7 +20,7 @@ export const postSchema = {
     type: "object",
     properties: {
         price: { type: "number" },
-        date: { type: "object", format: "custom-date-time" },
+        date: { type: "object", date: true },
         url: { type: "string" },
         theme: { type: "string" },
     },
