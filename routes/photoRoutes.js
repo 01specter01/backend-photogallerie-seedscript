@@ -6,11 +6,11 @@ import { postSchema, getSchema, deleteSchema } from "./photos.schema.js";
 const router = Router();
 
 router
-    .get("/", controller.getAllPhotos)
+    .get("/", validate(getSchema), controller.getAllPhotos)
     .get("/:photoId", controller.getPhoto)
     .post("/", validate(postSchema), controller.createPhoto)
     .patch("/:photoId", controller.updatePhoto)
     .put("/:photoId", controller.replacePhoto)
-    .delete("/:photoId", controller.deletePhoto);
+    .delete("/:photoId", validate(deleteSchema), controller.deletePhoto);
 
 export default router;

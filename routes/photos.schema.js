@@ -1,25 +1,23 @@
-import Ajv from "ajv";
-
-const ajv = new Ajv({ allErrors: true, allowUnionTypes: true });
-
 // In dieser Datei beschreiben wir die Struktur der Request Bodies.
 // Wir können mit Ajv - ähnlich wie in Mongoose Models - Schemas definieren.
 // Die Form ist hier natürlich etwas anders, erfüllt aber den gleichen Zweck.
 // Für jeden Endpoint richten wir ein eigenes Schema ein.
 const equipment = {
     type: "array",
-    additionalProperties: false,
-    properties: {
-        name: { type: "string" },
-        type: { type: "string" },
-        sensor: { type: "string" },
-        lensMount: { type: "string" },
-        manufacturer: { type: "string" },
+    items: {
+        type: "object",
+        properties: {
+            name: { type: "string" },
+            type: { type: "string" },
+            sensor: { type: "string" },
+            lensMount: { type: "string" },
+            manufacturer: { type: "string" },
+        },
+        additionalProperties: false,
     },
 };
 const setting = {
     type: "object",
-    additionalProperties: false,
     properties: {
         focalLength: { type: "number" },
         exposure: { type: "number" },
@@ -27,6 +25,8 @@ const setting = {
         iso: { type: "number" },
         whiteBalance: { type: "number" },
     },
+    required: [""],
+    additionalProperties: false,
 };
 /*
 adding equipment and settings in photos.schema.js to variable to validate them in main schema under setttings, equipment
@@ -42,7 +42,7 @@ export const postSchema = {
         setting,
     },
     required: ["url"],
-    // additionalProperties: false,
+    additionalProperties: false,
 };
 
 // Da wir bei GET und DELETE keinen Body haben,
