@@ -54,10 +54,10 @@ export const postSchema = {
 // Darf nichts in req.body übermittelt werden.
 export const getSchema = {
     type: "object",
-    // additionalProperties: false,
+    additionalProperties: false,
 };
 
 export const deleteSchema = {
     type: "object",
-    // additionalProperties: false,
+    additionalProperties: false,
 };
