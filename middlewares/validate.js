@@ -1,12 +1,13 @@
 import Ajv from "ajv";
+import addFormats from "ajv-formats";
 // ajv is activated sice it has already been installed
 
 const ajv = new Ajv({ allErrors: true });
+addFormats(ajv);
 // ajv is executed
 
 const validate = (schema) => {
     const test = ajv.compile(schema);
-    
 
     return (req, res, next) => {
         const valid = test(req.body);
