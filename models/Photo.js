@@ -29,52 +29,32 @@ const setting = new mongoose.Schema(
     {
         focalLength: {
             type: Number,
-            min: 18,
-            max: 55,
+            min: [18, "too low focalLength"],
+            max: [55, "too high focalLength"],
             required: true,
         },
         exposure: {
             type: Number,
+            min: [100, "too low exposure"],
+            max: [600, "too high exposure"],
             required: true,
-            validate: {
-                validator: (v) => {
-                    const val = v.Number > +(1 / 6000) && v.Number <= 600;
-                    return val;
-                },
-                message: "exposure value is not possible",
-            },
         },
         aperture: {
             type: Number,
+            min: [3000, "too low exposure"],
+            max: [6000, "too high exposure"],
             required: true,
-            validate: {
-                validator: (v) => {
-                    const val = v.Number >= 3000 && v.Number <= 10000;
-                    return val;
-                },
-                message: "aperture value is not possible",
-            },
         },
         iso: {
             type: Number,
+            min: [100, "too low exposure"],
+            max: [25000, "too high exposure"],
             required: true,
-            validate: {
-                validator: (v) => {
-                    const val = v.Number >= 100 && v.Number <= 25000;
-                    return val;
-                },
-                message: "iso value is not possible",
-            },
         },
         whiteBalance: {
             type: Number,
-            validate: {
-                validator: (v) => {
-                    const val = v.Number >= 3000 && v.Number <= 4000;
-                    return val;
-                },
-                message: "white balance value is not possible",
-            },
+            min: [1000, "too low exposure"],
+            max: [24000, "too high exposure"],
         },
     },
     { _id: false }

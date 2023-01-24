@@ -27,7 +27,7 @@ const createEquipment = () => ({
 
 const createSetting = () => ({
     focalLength: faker.datatype.number({ min: 18, max: 55 }),
-    exposure: faker.datatype.number({ min: +(1 / 6000), max: 600 }),
+    exposure: faker.datatype.number({ min: 100, max: 600 }),
     aperture: faker.datatype.number({ min: 3000, max: 6000 }),
     iso: faker.datatype.number({ min: 100, max: 25000 }),
     whiteBalance: faker.datatype.number({ min: 1000, max: 4000 }),
