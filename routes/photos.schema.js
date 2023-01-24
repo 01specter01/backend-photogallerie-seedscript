@@ -6,7 +6,13 @@ const ajv = new Ajv({ allErrors: true });
 // Wir können mit Ajv - ähnlich wie in Mongoose Models - Schemas definieren.
 // Die Form ist hier natürlich etwas anders, erfüllt aber den gleichen Zweck.
 // Für jeden Endpoint richten wir ein eigenes Schema ein.
-
+const equipment = {
+    type: "array",
+};
+const setting = {};
+/*
+adding equipment and settings in photos.schema.js to variable to validate them in main schema under setttings, equipment
+*/
 export const postSchema = {
     type: "object",
     properties: {
@@ -14,6 +20,8 @@ export const postSchema = {
         date: { type: "string", format: "date" },
         url: { type: "string" },
         theme: { type: "string" },
+        equipment,
+        setting,
     },
     required: ["url"],
     // additionalProperties: false,
