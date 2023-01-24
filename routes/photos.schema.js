@@ -13,6 +13,7 @@ const equipment = {
             lensMount: { type: "string" },
             manufacturer: { type: "string" },
         },
+        required: ["name", "type", "sensor", "lensMount"],
         additionalProperties: false,
     },
 };
@@ -25,7 +26,7 @@ const setting = {
         iso: { type: "number" },
         whiteBalance: { type: "number" },
     },
-    required: [""],
+    required: ["focalLength", "exposure", "aperture", "iso"],
     additionalProperties: false,
 };
 /*

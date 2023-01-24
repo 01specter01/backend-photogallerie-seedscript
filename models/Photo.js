@@ -31,7 +31,6 @@ const setting = new mongoose.Schema(
             type: Number,
             min: 18,
             max: 55,
-
             required: true,
         },
         exposure: {
