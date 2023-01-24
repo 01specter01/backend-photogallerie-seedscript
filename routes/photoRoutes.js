@@ -14,3 +14,5 @@ router
     .delete("/:photoId", validate(deleteSchema), controller.deletePhoto);
 
 export default router;
+
+// validate with 3 diff schema allows to validate correct input

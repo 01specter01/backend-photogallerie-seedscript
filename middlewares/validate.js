@@ -20,5 +20,4 @@ export default validate;
 validate function with schema which is a json format. 
 test variable compiles so that the following code can catch errors
 if no errors the req cicle will continue
-
 */

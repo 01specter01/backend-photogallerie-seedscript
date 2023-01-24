@@ -4,3 +4,5 @@ function log(req, res, next) {
 }
 
 export default log;
+
+// to display used methode (get,put,patch,delete) and parth eg ID used
