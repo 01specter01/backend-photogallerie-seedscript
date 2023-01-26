@@ -1,7 +1,7 @@
 import bcrypt from "bcrypt";
 import * as authUser from "../models/User.js";
 
-export const registerUser = async (req, res, next) => {
+export const register = async (req, res, next) => {
     const hashedPassword = await bcrypt.hash(req.body.password, 12);
     try {
         const newUser = await authUser.create({
