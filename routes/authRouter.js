@@ -1,5 +1,5 @@
 import { Router } from "express";
-import * as controller from "../controllers/photoController.js";
+import * as controller from "../controllers/authController.js";
 
 const router = Router();
 

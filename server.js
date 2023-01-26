@@ -1,6 +1,8 @@
 import express from "express";
 import photoRouter from "./routes/photoRoutes.js";
+import authRouter from "./routes/authRouter.js";
 import log from "./middlewares/log.js";
+import cors from "cors";
 
 import dotenv from "dotenv";
 dotenv.config();
@@ -10,6 +12,7 @@ import "./lib/connect_db.js";
 const app = express();
 const port = process.env.PORT || 4000;
 
+app.use(cors({ origin: "*" }));
 app.use(express.json());
 
 /*
@@ -24,7 +27,7 @@ app.use((req, res, next) => {
 */
 app.use(log);
 app.use("/photos", photoRouter);
-
+app.use("/auth", authRouter);
 /**
  * Wir implementieren einen Error Handler am Ende unserer Routen und Middleware, der alle Fehler
  * abfangen soll. Daher geben wir ihm einen flexiblen Statuscode. Wir setzen ihn nur 500,
