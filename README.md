@@ -42,3 +42,19 @@ Achte auf die Bedingungen in den Mongoose Schemas und versuche, diese für Ajv u
 Wenn du dich schrittweise durcharbeiten möchtest, nimm die Property additionalProperties: false raus oder setze sie auf true. So kannst du eine Property nach der anderen validieren und testen und musst nicht alles auf einmal machen.
 Bei den SubDocuments wird es etwas komplizierter. Wie kannst du auch hier sicherstellen, dass dort alles von Ajv überprüft wird?
 ```
+
+### Part 5
+
+```js
+Aufgabe Auth Routes:
+Wir implementieren die Auth Routes in unserer Foto App. Tue dir selber einen Gefallen und kopiere nicht einfach aus dem Livecoding :zwinkern:
+- 1. Installiere das Paket bcrypt
+- 2. Erstelle die notwendigen register and login Routen in einem neuen auth Router
+- 3. Erstelle ein neues Model für User mit den Feldern email und password
+- 4. Validiere das Model ausreichend
+- 5. Erstelle den Controller, der Registrierungsanfragen verarbeiten, indem ein neuer Nutzer angelegt wird und das Passwort gehashed gespeichert wird
+- 6. Erstelle den Controller, der Anmeldeanfragen verarbeitet, indem du Benutzername und Passwort überprüfst
+- 7. Betreibe Error Handling, wenn fehlerhafte Daten eingegeben werden
+- 8. Teste deine API mit eine Tool wie Thunderclient
+BONUS: Baue ein Frontend (plain HTML reicht) mit dem man sich registrieren und anmelden kann. Mach es schön
+```

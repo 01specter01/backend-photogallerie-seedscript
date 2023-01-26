@@ -1,5 +1,6 @@
 import * as Photo from "../models/Photo.js";
 import { faker } from "@faker-js/faker";
+import { bcrypt } from "bcrypt";
 
 /**
  * Für jede Router haben wir einen Controller
