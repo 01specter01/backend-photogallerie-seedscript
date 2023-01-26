@@ -1,6 +1,6 @@
-import mongoose from "mongoose";
+import { Schema, model } from "mongoose";
 
-const userSchema = new mongoose.Schema(
+const userSchema = new Schema(
     {
         email: {
             type: String,
@@ -23,5 +23,14 @@ const userSchema = new mongoose.Schema(
     }
 );
 
-const User = mongoose.model("User", userSchema);
+const userModel = model("User", userSchema);
 
+export const create = async (data) => {
+    const result = await userModel.create(data);
+    return result;
+};
+
+export const getOne = async (filter) => {
+    const result = await userModel.findOne(filter);
+    return result;
+};

@@ -1,5 +1,5 @@
-import { bcrypt } from "bcrypt";
-import * as User from "../models/User.js";
+import bcrypt from "bcrypt";
+import * as authUser from "../models/User.js";
 
 const errorSwitch = (err) => {
     switch (err.path) {
@@ -13,10 +13,17 @@ const errorSwitch = (err) => {
     }
     return err;
 };
-export const registerUser = async(req, res, next) => {
-try{
-    const result = await User.create(req.body.email)
-} catch {
+export const registerUser = async (req, res, next) => {
+    const hashedPassword = await bcrypt.hash(req.body.password, 12);
+    try {
+        const newUser = await authUser.create({
+            email: req.body.email,
+            password: req.body.hashedPassword,
+        })
 
-}
-}
+        res.status(201).json({
+            email: newUser.email,
+            password: newUser.authUser
+        })
+    } catch {}
+};
