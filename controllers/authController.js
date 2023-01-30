@@ -52,7 +52,7 @@ export const login = async (req, res, next) => {
             });
         } else {
             const err = new Error("Login not possible!");
-            err.statusCode = 400;
+            err.statusCode = 401;
             throw err;
         }
     } catch (err) {
